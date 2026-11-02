@@ -95,3 +95,21 @@ views/        one component per page, registered in router.js
 components/   reusable pieces: EventCard, SeatMeter, RegistrationForm, ErrorMessage
 styles.css    design tokens at the top, change those first
 ```
+
+## Assignment implementation
+
+- The API is split into routes, controllers, services, repositories, models, configuration and middleware.
+- GET results are cached in memory for 30 seconds. Every successful create, update, delete or registration clears the cache so later reads cannot return stale data.
+- Nodemailer sends a confirmation after the registration is stored. SMTP errors are logged and never roll back or hide the successful registration.
+- `render.yaml` and production static-file serving allow the Vue app and API to run as one Render service.
+
+### Stack Overflow references used
+
+- [ExpressJS: How to cache on demand](https://stackoverflow.com/questions/69964270/expressjs-how-to-cache-on-demand) — used for the cache-aside pattern: read cached GET data, populate on a miss, and explicitly clear cached data after mutations.
+- [Handle and pass errors from Nodemailer sendMail](https://stackoverflow.com/questions/66912464/handle-and-pass-errors-from-nodemailer-sendmail) — used to confirm that `sendMail()` returns a promise and that `await` plus `try/catch` reliably handles SMTP failures.
+
+### Deployment note
+
+The default Render free configuration stores SQLite in `/tmp`, so demo data can reset when the service restarts. For persistent production data, attach a Render disk or use a hosted SQL database and update `DB_STORAGE`.
+
+Render free web services block the standard SMTP ports 25, 465 and 587. Configure Brevo SMTP on port 2525 so Nodemailer can send registration confirmations from the deployed application. Store the full connection string only in Render's private `SMTP_URL` environment variable; never commit SMTP credentials.

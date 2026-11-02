@@ -1,5 +1,6 @@
 # Dependencies – restored with `npm ci`, never committed
 node_modules/
+.npm-cache/
 
 # Secrets – copy .env.example to .env locally
 .env
