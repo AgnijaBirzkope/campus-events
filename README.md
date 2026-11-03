@@ -112,4 +112,4 @@ styles.css    design tokens at the top, change those first
 
 The default Render free configuration stores SQLite in `/tmp`, so demo data can reset when the service restarts. For persistent production data, attach a Render disk or use a hosted SQL database and update `DB_STORAGE`.
 
-Render free web services block the standard SMTP ports 25, 465 and 587. Configure Brevo SMTP on port 2525 so Nodemailer can send registration confirmations from the deployed application. Store the full connection string only in Render's private `SMTP_URL` environment variable; never commit SMTP credentials.
+Render free web services block the standard SMTP ports 25, 465 and 587. Configure Resend SMTP on port 2587 so Nodemailer can send registration confirmations from the deployed application. Store the full connection string only in Render's private `SMTP_URL` environment variable; never commit SMTP credentials.
