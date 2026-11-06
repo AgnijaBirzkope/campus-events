@@ -98,6 +98,8 @@ styles.css    design tokens at the top, change those first
 
 ## Assignment implementation
 
+Live application: [https://campus-events-cctm.onrender.com](https://campus-events-cctm.onrender.com)
+
 - The API is split into routes, controllers, services, repositories, models, configuration and middleware.
 - GET results are cached in memory for 30 seconds. Every successful create, update, delete or registration clears the cache so later reads cannot return stale data.
 - Nodemailer sends a confirmation after the registration is stored. SMTP errors are logged and never roll back or hide the successful registration.
